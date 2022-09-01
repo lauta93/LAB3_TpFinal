@@ -1,12 +1,38 @@
 <template>
+
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/CompraVenta">Comprar</router-link> | 
+    <router-link to="/historial">Historial</router-link> | 
+      
+    {{this.$store.state.username}}  <button class="boton" @click="Logout">Cerrar sesion</button>
   </nav>
-  <router-view/>
+  <LoginComponent v-if="$store.state.username===''"></LoginComponent>
+  <router-view></router-view>
+     
+  
+
 </template>
+<script>
+// @ is an alias to /src
+
+import LoginComponent from "./components/LoginComponent.vue";
+export default{
+    components: {
+      LoginComponent
+      },
+      methods:{
+        Logout(){
+          location.reload()
+        }
+      }
+
+    
+}
+</script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -25,6 +51,7 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: darkkhaki;
 }
+
 </style>
