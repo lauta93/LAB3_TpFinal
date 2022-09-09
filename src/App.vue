@@ -22,8 +22,9 @@ export default{
       LoginComponent
       },
       methods:{
-        Logout(){
-          location.reload()
+        Logout(){        
+          this.$store.state.username=''
+          this.$router.replace('/')
         }
       }
 

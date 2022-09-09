@@ -1,18 +1,28 @@
 <template>
-<div class="recuadro">
+<div class="popUp">
     <div class="recuadro-inner">    
-    <p>{{transaccion}}</p>
-    <button @click="cancelar">Cancelar</button>
+    <div> Cantidad de {{transaccion.crypto_code}}: <input type="text" v-model="transaccion.crypto_amount"></div>
+    <div> Precio pagado: <input type="text" v-model="transaccion.money"></div>
+    <div>
+      <select v-model="transaccion.action">
+      <option value="purchase">Compra</option>
+      <option value="sale">Venta</option>
+    </select>    
     </div>
+    {{mensaje}}
+    <button v-if="!modificado" @click="modificar">Confirmar</button>
+    <button v-if="!modificado" @click="cancelar">Cancelar</button>    
+    <button id="btnEntendido" v-if="modificado" @click="cancelar">Entendido</button>    
+    </div>    
 </div>
 </template>
 <script>
+import serviceDB from '@/services/apiBD.js'
 export default {
   name: 'Modification',
   data(){
     return{   
-   mensaje: "Modificar..asdasdasd",
-   transaccion_id: ''
+   mensaje: ''
     }
   },
   props: {
@@ -24,14 +34,44 @@ export default {
   methods:{
     cancelar(){
       this.$store.state.modificar=false
+    },
+    modificar(){
+      if(this.transaccion.crypto_amount <=0){
+        this.mensaje= 'La cantidad de '+ this.transaccion.crypto_code + 'debe ser mayor a cero'
+      }else if(this.transaccion.money<1){
+        this.mensaje= 'La cantidad de dinero debe ser mayor a uno'
+      }else{
+         serviceDB.modificarRegistro(this.transaccion._id, this.transaccion)
+         this.mensaje= 'Modificado con exito' 
+        }
     }
+  },
+  computed:{
+   modificado(){
+    return this.mensaje==='Modificado con exito' ? true:false
+   },
+   hoyDia(){
+    let currentDay = new Date()
+        let currentMonth=(currentDay.getMonth()+1)
+        let dia= currentDay.getDate()
+        if(currentMonth<10){
+            currentMonth= '0'+currentMonth
+        }
+        if(dia<10){
+            dia='0'+dia
+
+        }
+        return currentDay.getFullYear()+ "-" + currentMonth + "-" + dia
+        
+    
+   }
   }
 }
 
 
 </script>
 <style scoped>
-.recuadro{
+.popUp{
     position: fixed;
     top: 0;
     left: 0;
@@ -49,5 +89,8 @@ export default {
     background: #FFF;
     padding: 30px;
     border-radius: 2%;
+}
+.btnEntendido{
+  flex: auto;
 }
 </style>

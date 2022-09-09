@@ -9,6 +9,12 @@ const apiClient = axios.create({
         },
         obtenerRegistro(user){            
             return apiClient.get('https://laboratorio3-f36a.restdb.io/rest/transactions?q={"user_id": "'+user+'"} ')
+        },
+        modificarRegistro(idTransaccion, obj){            
+            return apiClient.patch('https://laboratorio3-f36a.restdb.io/rest/transactions/'+idTransaccion, obj)
+        },
+        eliminarRegistro(idTransaccion){
+            return apiClient.delete('https://laboratorio3-f36a.restdb.io/rest/transactions/'+idTransaccion)
         }
         
     }

@@ -7,14 +7,16 @@
         </option>
     </select>
     <div v-if="monedaSeleccionada!=''">
-    <input  placeholder="Cantidad a comprar   " type="text" v-model="monto" :disabled="isDisabled" >
+<label> Cantidad de {{monedaSeleccionada.toUpperCase()}} a comprar:
+    <input @keypress.enter="getExchanges" type="text" v-model="monto">
+</label>
     <button @click="getExchanges">Buscar Markets</button>
     </div>
 
     <div id="contenedor" v-if="exchanges!=''">
       <div id="compra">
-        <h5>Elegi el mejor precio (comisiones incluidas)</h5>
-        <select v-model="selectedPrice" multiple>
+        <h5>Elegi el mejor precio para comprar {{monedaSeleccionada.toUpperCase()}} aqui abajo  (comisiones incluidas)</h5>
+        <select v-model="selectedPrice" >
          <option v-for="(exchange, key) in exchanges" :key="exchange" 
          v-bind:value="exchange.totalAsk">
          {{key}}: AR${{((exchange.totalAsk)*monto).toFixed(2)}}--->Precio comision:{{((exchange.totalAsk - exchange.ask)*monto).toFixed(2)}}
@@ -28,16 +30,15 @@
         <p>Estas a punto de comprar {{monto}} {{monedaSeleccionada}} por el valor de  AR${{(selectedPrice*monto).toFixed(2)}} </p>
         <button @click="verificarDatos">Confirmar</button>
         <button @click="cancelar">Cancelar</button>
-    </div>
-    <div>
-        <p>{{compraConfirmada}}</p>
-    </div>
+    </div>   
    </div>
-
+  <notifComponent v-if="this.$store.state.mostrarPopUp" :message="'Compra exitosa'"></notifComponent>
 </template>
 <script>
 import service from '@/services/apis.js'
 import serviceDB from '@/services/apiBD.js'
+import notifComponent from  '@/components/NotificationComponent.vue'
+
 
 
 export default {
@@ -53,6 +54,9 @@ data() {
             compraConfirmada: {}
             
         }
+    },
+    components:{
+         notifComponent
     },
 methods:{       
     
@@ -79,8 +83,11 @@ methods:{
                 "crypto_amount": this.monto,
                 "money": (this.selectedPrice*this.monto).toFixed(2),
                 "datetime": (Date.now() - 10800000)
-            }
-            serviceDB.registrarCompra(this.compraConfirmada)
+            }            
+            serviceDB.registrarCompra(this.compraConfirmada)            
+            this.cancelar()
+            this.$store.state.mostrarPopUp=true
+
         }
 
         

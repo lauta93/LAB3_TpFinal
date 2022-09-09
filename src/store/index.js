@@ -10,7 +10,7 @@ export default createStore({
       {id: 'usdt', nombre: 'USDT'},        
       {id: 'doge', nombre: 'DogeCoin'}        
     ],
-    modificar:false      
+    mostrarPopUp: false     
   },
   getters: {
   },
