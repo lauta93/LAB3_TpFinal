@@ -1,5 +1,5 @@
 <template>       
-
+  <h2>Dar de alta nueva compra</h2>
     <select v-model="monedaSeleccionada"> 
         <option value="">Elegi una moneda</option>          
         <option v-for="moneda in monedas" :key="moneda" v-bind:value="moneda.id">
@@ -97,22 +97,7 @@ methods:{
         this.monedaSeleccionada= '',
         this.exchanges='',
         this.selectedPrice=''
-    },
-    getFecha(){
-        let currentDay = new Date()
-        let currentMonth=(currentDay.getMonth()+1)
-        let dia= currentDay.getDate()
-        if(currentMonth<10){
-            currentMonth= '0'+(currentDay.getMonth()+1)
-        }
-        if(dia<10){
-            dia='0'+dia
-
-        }
-        return dia + "-" + currentMonth + "-" +
-        currentDay.getFullYear()+ " " +currentDay.getHours()+ ":" +currentDay.getMinutes()
     }
-
     },    
 created(){
       this.obtenerMonedas()

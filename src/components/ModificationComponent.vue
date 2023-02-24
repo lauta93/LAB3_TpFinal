@@ -3,6 +3,7 @@
     <div class="recuadro-inner">    
     <div> Cantidad de {{transaccion.crypto_code}}: <input type="text" v-model="transaccion.crypto_amount"></div>
     <div> Precio pagado: <input type="text" v-model="transaccion.money"></div>
+    <div> Fecha: <input type="date" v-model="transaccion.datetime"></div>
     <div>
       <select v-model="transaccion.action">
       <option value="purchase">Compra</option>
@@ -49,21 +50,6 @@ export default {
   computed:{
    modificado(){
     return this.mensaje==='Modificado con exito' ? true:false
-   },
-   hoyDia(){
-    let currentDay = new Date()
-        let currentMonth=(currentDay.getMonth()+1)
-        let dia= currentDay.getDate()
-        if(currentMonth<10){
-            currentMonth= '0'+currentMonth
-        }
-        if(dia<10){
-            dia='0'+dia
-
-        }
-        return currentDay.getFullYear()+ "-" + currentMonth + "-" + dia
-        
-    
    }
   }
 }

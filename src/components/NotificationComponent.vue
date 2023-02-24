@@ -1,7 +1,7 @@
 <template>
     <div class="popUp">
         <div class="recuadro-inner">
-            {{message}}
+            <div>{{message}}</div>
            <button @click="cerrar">Entendido</button>
 
         </div>

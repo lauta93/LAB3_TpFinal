@@ -1,21 +1,31 @@
 <template>
   <div class="home">    
     
-  <h2>ImagenCrypo</h2>
+  <div><button @click="getCantidadesCrypto">get</button> </div>
   </div>
 </template>
 <script>
 
-import service from '@/services/apis.js'
+import serviceDB from '@/services/apiBD.js'
 export default{
   name: 'HomeView',
   data() {
     return {
-      precio:[],
       transacciones: []
+      
     }
+  },
+  methods: {
+    getCantidadesCrypto(){
+      
+      console.log(this.transacciones)
+      
+    }
+
+  },
+  mounted(){
+    this.$store.dispatch('obtenerTransacciones')
+    this.transacciones = this.$store.state.transacciones
   }
   }
-
-
 </script>

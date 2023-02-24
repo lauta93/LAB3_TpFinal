@@ -18,6 +18,7 @@
       <td> | <button @click="modificarMovimiento(movimiento)">Modificar</button><button @click="eliminar(movimiento._id)">Eliminar</button></td>
     </tr>    
   </table>  
+  
   </div>
   <modificationComponent :transaccion="movimientoAModificar" v-if="this.$store.state.modificar"></modificationComponent>
   <notificationComponent :message='"Eliminado con exito"' v-if="this.$store.state.mostrarPopUp"></notificationComponent>
@@ -50,18 +51,13 @@ export default {
     modificarMovimiento(movimiento){
       this.movimientoAModificar=movimiento
       this.$store.state.modificar= true
-
     },
     eliminar(id){
-      serviceDB.eliminarRegistro(id)            
+      serviceDB.eliminarRegistro(id)
       this.$store.state.mostrarPopUp=true
-      
-      this.getMovimientos()    
+      this.getMovimientos()
     }
-  },
-  created(){
-    this.getMovimientos()    
-  },
+  },  
   mounted(){
     this.getMovimientos()
   }
