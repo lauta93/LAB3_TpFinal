@@ -10,7 +10,7 @@
       <option value="sale">Venta</option>
     </select>    
     </div>
-    {{mensaje}}
+   {{mensaje}}
     <button v-if="!modificado" @click="modificar">Confirmar</button>
     <button v-if="!modificado" @click="cancelar">Cancelar</button>    
     <button id="btnEntendido" v-if="modificado" @click="cancelar">Entendido</button>    
@@ -38,7 +38,7 @@ export default {
     },
     modificar(){
       if(this.transaccion.crypto_amount <=0){
-        this.mensaje= 'La cantidad de '+ this.transaccion.crypto_code + 'debe ser mayor a cero'
+        this.mensaje= 'La cantidad de  '+ this.transaccion.crypto_code + ' debe ser mayor a cero'
       }else if(this.transaccion.money<1){
         this.mensaje= 'La cantidad de dinero debe ser mayor a uno'
       }else{
@@ -72,7 +72,7 @@ export default {
 }
 .recuadro-inner{
     position: relative;
-    background: #FFF;
+    background: #df7474;
     padding: 30px;
     border-radius: 2%;
 }

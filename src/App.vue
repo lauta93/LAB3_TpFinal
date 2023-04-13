@@ -3,7 +3,9 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/CompraVenta">Comprar</router-link> | 
+    <router-link to="/venta">Vender</router-link> |
     <router-link to="/historial">Historial</router-link> | 
+    
       
     {{this.$store.state.username}}  <button class="boton" @click="Logout">Cerrar sesion</button>
   </nav>
@@ -33,6 +35,13 @@ export default{
 </script>
 
 <style>
+body{  
+  background-image: url("https://img.freepik.com/fotos-premium/cielo-azul-claro-como-fondo-pantalla-fondo-pantalla-cielo-colores-pastel_103864-556.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: hard-light;
+  
+}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -52,7 +61,7 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: darkkhaki;
+  color: rgb(206, 63, 19);
 }
 
 </style>

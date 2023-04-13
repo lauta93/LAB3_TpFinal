@@ -10,6 +10,7 @@
 </div>
 </template>
 <script>
+import serviceDB from '@/services/apiBD.js'
 export default {
   name: 'Login',
   data(){
@@ -38,6 +39,8 @@ export default {
          this.mensaje='El usuario debe ser alfanumerico'
       }else{
         this.$store.commit('IngresarUsuario', this.usuario)
+        this.$store.dispatch('obtenerTransacciones')
+      
       }        
      }
     }
@@ -62,7 +65,7 @@ export default {
 }
 .recuadro-inner{
     position: relative;
-    background: #FFF;
+    background: #df7474;
     padding: 30px;
     border-radius: 2%;
 }

@@ -43,7 +43,7 @@ export default {
 }
 .recuadro-inner{
     position: relative;
-    background: #FFF;
+    background: #df7474;
     padding: 30px;
     border-radius: 2%;
 }

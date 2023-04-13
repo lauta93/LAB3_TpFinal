@@ -12,6 +12,7 @@ export default createStore({
     ],
     mostrarPopUp: false,
     modificar: false,
+    vender: false,
     transacciones: []  
   },
   getters: {
