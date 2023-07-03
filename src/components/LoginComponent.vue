@@ -43,7 +43,12 @@ export default {
       }        
      }
     }
-  }  
+  },
+  unmounted(){
+    this.$store.dispatch('obtenerTransacciones')
+    this.$store.commit('calcularCantidades')
+    this.$store.commit('obtenerPrecioVenta')
+  } 
 }
 
 

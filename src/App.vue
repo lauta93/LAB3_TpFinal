@@ -5,6 +5,7 @@
     <router-link to="/CompraVenta">Comprar</router-link> | 
     <router-link to="/venta">Vender</router-link> |
     <router-link to="/historial">Historial</router-link> | 
+    <router-link to="/Inversiones">Inversiones</router-link> | 
     
       
     {{this.$store.state.username}}  <button class="boton" @click="Logout">Cerrar sesion</button>

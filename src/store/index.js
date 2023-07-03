@@ -5,11 +5,11 @@ export default createStore({
   state: {
     username: '',
     currencies: [
-      {id: 'btc', nombre: 'Bitcoin', cantidad: 0, valorCompra: 0, valorVenta: 0},
-      {id: 'eth', nombre: 'Ethereum', cantidad: 0, valorCompra: 0, valorVenta: 0},
-      {id: 'dai', nombre: 'DAI', cantidad: 0, valorCompra: 0, valorVenta: 0},
-      {id: 'usdt', nombre: 'USDT', cantidad: 0, valorCompra: 0, valorVenta: 0},        
-      {id: 'doge', nombre: 'DogeCoin', cantidad: 0, valorCompra: 0, valorVenta: 0}        
+      {id: 'btc', nombre: 'Bitcoin', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0},
+      {id: 'eth', nombre: 'Ethereum', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0},
+      {id: 'dai', nombre: 'DAI', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0},
+      {id: 'usdt', nombre: 'USDT', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0},        
+      {id: 'doge', nombre: 'DogeCoin', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0}        
     ],
     mostrarPopUp: false,
     modificar: false,
@@ -27,6 +27,9 @@ export default createStore({
 
     },
     calcularCantidades(){
+      this.state.currencies.forEach(curencie=>{
+        curencie.cantidad=0
+      })
       this.state.transacciones.forEach(transaccion => {
         this.state.currencies.forEach(moneda=>{
             if(transaccion.crypto_code===moneda.id){

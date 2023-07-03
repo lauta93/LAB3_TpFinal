@@ -27,6 +27,13 @@ const routes = [
     component: ()=> {
       return import('../views/VentaView.vue')
     }
+  },
+  {
+    path: '/Inversiones',
+    name: 'Inversiones',
+    component: ()=> {
+      return import('../views/InversionesView.vue')
+    }
   }
 ]
 

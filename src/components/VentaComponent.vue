@@ -81,6 +81,10 @@
         service.getMarkets(this.moneda, this.cantidadTotal).then((response)=>{
           this.exchanges=response.data         
         })
+      },
+      unmounted(){
+        this.$store.dispatch('obtenerTransacciones')
+        this.$store.commit('calcularCantidades')
       }
     }   
     </script>

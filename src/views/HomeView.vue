@@ -40,10 +40,13 @@ export default{
     this.calcularTotal()
   },   
   unmounted(){
-    this.$store.state.currencies.forEach(moneda=>{
-    moneda.cantidad=0
-    })
     this.total=0
+  }, 
+  onload(){
+    this.$store.dispatch('obtenerTransacciones')
+    this.$store.commit('calcularCantidades')
+    this.$store.commit('obtenerPrecioVenta')
+    this.calcularTotal()
   }
   }
 </script>
