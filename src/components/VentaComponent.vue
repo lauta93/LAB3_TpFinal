@@ -24,7 +24,7 @@
       data(){
         return{   
        mensaje: '',
-       cantidadElegida: 0,
+       cantidadElegida: '',
        precioElegido: 0,
        exchanges: [],
        ventaConfirmada: {}
@@ -64,10 +64,7 @@
         }
         },
       cancelar(){
-           this.$store.state.vender=false 
-           this.$store.state.currencies.forEach(moneda=>{
-                moneda.cantidad=0
-            })
+           this.$store.state.vender=false
            this.$store.dispatch('obtenerTransacciones')      
            this.$store.commit('calcularCantidades')
      }

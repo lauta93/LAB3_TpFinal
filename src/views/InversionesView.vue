@@ -33,6 +33,7 @@ export default{
                 else{
                     moneda.vendido=+transaccion.money
                 }
+                moneda.precioUnitario=(transaccion.money/transaccion.crypto_amount)
             }
         })
       })
@@ -40,7 +41,12 @@ export default{
         moneda.dif=moneda.vendido-moneda.comprado
       })
       this.$store.state.currencies.forEach(moneda=>{
-        moneda.ganancia=moneda.dif+(moneda.comprado * moneda.cantidad)
+        if(moneda.vendido===0){
+          moneda.ganancia=moneda.dif+moneda.comprado
+        }else{
+          moneda.ganancia=moneda.dif+((moneda.comprado - moneda.precioUnitario ) * moneda.cantidad)
+        }
+        
       })
 
     }
@@ -48,6 +54,11 @@ export default{
   mounted(){
     this.$store.dispatch('obtenerTransacciones')
     this.calcularGanancias()
+  },
+  unmounted(){
+    this.$store.state.currencies.forEach(moneda=>{
+      moneda.dif=0
+      })
   }
   }
 </script>
