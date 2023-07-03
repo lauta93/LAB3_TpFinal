@@ -9,7 +9,7 @@
 </tr>
 <tr v-for="(moneda) in monedas" :key="moneda">
     <td>{{ moneda.id.toUpperCase() }}</td>
-    <td>${{ moneda.ganancia }}</td>
+    <td>${{ moneda.ganancia.toFixed(2) }}</td>
 </tr>    
 </table>
 </template>
