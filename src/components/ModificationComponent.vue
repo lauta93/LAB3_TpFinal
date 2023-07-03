@@ -39,12 +39,14 @@ export default {
     modificar(){
       if(this.transaccion.crypto_amount <=0){
         this.mensaje= 'La cantidad de  '+ this.transaccion.crypto_code + ' debe ser mayor a cero'
-      }else if(this.transaccion.money<1){
+      }
+      else if(this.transaccion.money<1){
         this.mensaje= 'La cantidad de dinero debe ser mayor a uno'
-      }else{
+      }
+      else{
          serviceDB.modificarRegistro(this.transaccion._id, this.transaccion)
          this.mensaje= 'Modificado con exito' 
-        }
+      }
     }
   },
   computed:{
@@ -53,8 +55,6 @@ export default {
    }
   }
 }
-
-
 </script>
 <style scoped>
 .popUp{
@@ -67,8 +67,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
-    justify-content: center;
-    
+    justify-content: center;    
 }
 .recuadro-inner{
     position: relative;

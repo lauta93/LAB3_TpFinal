@@ -10,7 +10,6 @@
 </div>
 </template>
 <script>
-import serviceDB from '@/services/apiBD.js'
 export default {
   name: 'Login',
   data(){

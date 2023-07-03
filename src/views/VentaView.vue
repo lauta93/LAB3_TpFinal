@@ -3,7 +3,7 @@
   <table class="table" v-if="monedas!=''" >
 <tr>
     <th>Moneda</th>
-    <th>Cantidad disponible</th>
+    <th>Disponible</th>
 </tr>
 <tr v-for="(moneda) in monedas" :key="moneda">
     <td>{{ moneda.id.toUpperCase() }}</td>
@@ -20,28 +20,12 @@ import VentaComponent from '@/components/VentaComponent.vue'
 export default {
 data(){
     return{
-        monedas:[],
+        monedas:this.$store.state.currencies,
         monedaSeleccionada: '',
         cantidad: 0
     }
 },
-  methods: {
-    calcularCantidades(){
-
-        this.$store.state.transacciones.forEach(transaccion => {
-            this.$store.state.currencies.forEach(moneda=>{
-                if(transaccion.crypto_code===moneda.id){
-                    if(transaccion.action==='purchase'){
-                        moneda.cantidad=parseFloat(moneda.cantidad)+parseFloat(transaccion.crypto_amount)
-                    }
-                    else{
-                        moneda.cantidad=parseFloat(moneda.cantidad)-parseFloat(transaccion.crypto_amount)
-                    }
-                }
-            })
-        })
-        this.monedas=this.$store.state.currencies
-    }, 
+  methods: { 
     vender(moneda, cantidadTotal){
      this.monedaSeleccionada=moneda
      this.cantidad=cantidadTotal
@@ -53,7 +37,7 @@ data(){
   },
   mounted(){
     this.$store.dispatch('obtenerTransacciones')
-    this.calcularCantidades()
+    this.$store.commit('calcularCantidades')
   }, 
   unmounted(){
     this.$store.state.currencies.forEach(moneda=>{

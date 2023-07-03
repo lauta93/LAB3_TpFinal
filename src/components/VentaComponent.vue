@@ -13,8 +13,7 @@
         <button v-if="!vendido" @click="confirmarVenta">Confirmar</button>
         <button v-if="!vendido" @click="cancelar">Cancelar</button>
         <button v-if="vendido" @click="cancelar">Entendido</button> 
-        </div>
-          
+        </div>          
     </div>
     </template>
     <script>
@@ -60,13 +59,17 @@
                 "money": (this.precioElegido*this.cantidadElegida).toFixed(2),
                 "datetime": (Date.now() - 10800000)
             }
-
         serviceDB.registrarCompra(this.ventaConfirmada)
-         this.mensaje= 'Venta exitosa' 
+         this.mensaje= 'Venta exitosa'        
         }
         },
-        cancelar(){
-      this.$store.state.vender=false
+      cancelar(){
+           this.$store.state.vender=false 
+           this.$store.state.currencies.forEach(moneda=>{
+                moneda.cantidad=0
+            })
+           this.$store.dispatch('obtenerTransacciones')      
+           this.$store.commit('calcularCantidades')
      }
       },
       computed:{
@@ -79,9 +82,7 @@
           this.exchanges=response.data         
         })
       }
-    }
-    
-    
+    }   
     </script>
     <style scoped>
     .popUp{
@@ -94,8 +95,7 @@
         background-color: rgba(0, 0, 0, 0.3);
         display: flex;
         align-items: center;
-        justify-content: center;
-        
+        justify-content: center;        
     }
     .recuadro-inner{
         position: relative;

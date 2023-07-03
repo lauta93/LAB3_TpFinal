@@ -1,14 +1,15 @@
 import { createStore } from 'vuex'
 import serviceDB from '@/services/apiBD.js'
+import service from '@/services/apis.js'
 export default createStore({
   state: {
     username: '',
     currencies: [
-      {id: 'btc', nombre: 'Bitcoin', cantidad: 0},
-      {id: 'eth', nombre: 'Ethereum', cantidad: 0},
-      {id: 'dai', nombre: 'DAI', cantidad: 0},
-      {id: 'usdt', nombre: 'USDT', cantidad: 0},        
-      {id: 'doge', nombre: 'DogeCoin', cantidad: 0}        
+      {id: 'btc', nombre: 'Bitcoin', cantidad: 0, valorCompra: 0, valorVenta: 0},
+      {id: 'eth', nombre: 'Ethereum', cantidad: 0, valorCompra: 0, valorVenta: 0},
+      {id: 'dai', nombre: 'DAI', cantidad: 0, valorCompra: 0, valorVenta: 0},
+      {id: 'usdt', nombre: 'USDT', cantidad: 0, valorCompra: 0, valorVenta: 0},        
+      {id: 'doge', nombre: 'DogeCoin', cantidad: 0, valorCompra: 0, valorVenta: 0}        
     ],
     mostrarPopUp: false,
     modificar: false,
@@ -24,17 +25,42 @@ export default createStore({
     CargarTransacciones(state, transacctions){
       state.transacciones=transacctions     
 
+    },
+    calcularCantidades(){
+      this.state.transacciones.forEach(transaccion => {
+        this.state.currencies.forEach(moneda=>{
+            if(transaccion.crypto_code===moneda.id){
+                if(transaccion.action==='purchase'){
+                    moneda.cantidad=parseFloat(moneda.cantidad)+parseFloat(transaccion.crypto_amount)
+                }
+                else{
+                    moneda.cantidad=parseFloat(moneda.cantidad)-parseFloat(transaccion.crypto_amount)
+                }
+            }
+        })
+    })
+    },
+    obtenerPrecioVenta(){
+      this.state.currencies.forEach(moneda=>{
+        service.getPrecioMoneda(moneda.id).then((response)=>{
+          moneda.valorVenta=response.data.totalBid   
+        })
+      })      
+    },
+    obtenerPrecioCompra(){
+      this.state.currencies.forEach(moneda=>{
+        service.getPrecioMoneda(moneda.id).then((response)=>{
+          moneda.valorCompra=response.data.totalAsk       
+        })
+      })
     }  
-
-   
   },
   actions: {
     obtenerTransacciones({commit}){
       serviceDB.obtenerRegistro(this.state.username).then((response)=>{
         commit('CargarTransacciones', response.data)
       })
-    }
-   
+    }   
   },
   modules: {
   }
