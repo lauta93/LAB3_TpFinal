@@ -29,22 +29,24 @@ export default{
             if(moneda.id===transaccion.crypto_code){
                 if(transaccion.action==='purchase'){
                     moneda.comprado=+transaccion.money
+                    moneda.precioUnitarioCompra=(transaccion.money/transaccion.crypto_amount)
                 }
                 else{
                     moneda.vendido=+transaccion.money
+                    moneda.cantidadVendida=+transaccion.crypto_amount
+                    moneda.precioUnitarioVenta=(transaccion.money/transaccion.crypto_amount)
                 }
-                moneda.precioUnitario=(transaccion.money/transaccion.crypto_amount)
             }
         })
       })
       this.$store.state.currencies.forEach(moneda=>{
-        moneda.dif=moneda.vendido-moneda.comprado
+        moneda.dif=moneda.precioUnitarioVenta-moneda.precioUnitarioCompra
       })
       this.$store.state.currencies.forEach(moneda=>{
         if(moneda.vendido===0){
-          moneda.ganancia=moneda.dif+moneda.comprado
+          moneda.ganancia=moneda.dif+moneda.precioUnitarioCompra
         }else{
-          moneda.ganancia=moneda.dif+((moneda.comprado - moneda.precioUnitario ) * moneda.cantidad)
+          moneda.ganancia= moneda.dif * moneda.cantidadVendida
         }
         
       })

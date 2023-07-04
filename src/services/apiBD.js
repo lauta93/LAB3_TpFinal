@@ -1,20 +1,20 @@
 import axios from "axios"
 const apiClient = axios.create({
-    baseURL: 'https://labor3-d60e.restdb.io/rest',
-    headers: {'x-apikey': '64a2e9bc86d8c525a3ed8f63'}
+    baseURL: 'https://laboratorio3-f36a.restdb.io/rest',
+    headers: {'x-apikey': '60eb09146661365596af552f'}
     })
     export default{
         registrarCompra(obj){
-            return apiClient.post("https://labor3-d60e.restdb.io/rest/transactions", obj)
+            return apiClient.post("https://laboratorio3-f36a.restdb.io/rest/transactions", obj)
         },
         obtenerRegistro(user){            
-            return apiClient.get('https://labor3-d60e.restdb.io/rest/transactions?q={"user_id": "'+user+'"} ')
+            return apiClient.get('https://laboratorio3-f36a.restdb.io/rest/transactions?q={"user_id": "'+user+'"} ')
         },
         modificarRegistro(idTransaccion, obj){            
-            return apiClient.patch('https://labor3-d60e.restdb.io/rest/transactions/'+idTransaccion, obj)
+            return apiClient.patch('https://laboratorio3-f36a.restdb.io/rest/transactions/'+idTransaccion, obj)
         },
         eliminarRegistro(idTransaccion){
-            return apiClient.delete('https://labor3-d60e.restdb.io/rest/transactions/'+idTransaccion)
+            return apiClient.delete('https://laboratorio3-f36a.restdb.io/rest/transactions/'+idTransaccion)
         }
         
     }
