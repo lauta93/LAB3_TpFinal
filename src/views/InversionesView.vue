@@ -24,42 +24,45 @@ export default{
   },
   methods: {
     calcularGanancias(){
-      this.$store.state.currencies.forEach(moneda => {
+      this.monedas.forEach(moneda => {
         this.$store.state.transacciones.forEach(transaccion=>{
             if(moneda.id===transaccion.crypto_code){
                 if(transaccion.action==='purchase'){
                     moneda.comprado=+transaccion.money
-                    moneda.precioUnitarioCompra=(transaccion.money/transaccion.crypto_amount)
+                    moneda.cantidadComprada=+transaccion.crypto_amount
                 }
                 else{
-                    moneda.vendido=+transaccion.money
-                    moneda.cantidadVendida=+transaccion.crypto_amount
-                    moneda.precioUnitarioVenta=(transaccion.money/transaccion.crypto_amount)
+                    moneda.vendido =+transaccion.money
+                    moneda.cantidadVendida =+transaccion.crypto_amount
                 }
             }
-        })
-      })
-      this.$store.state.currencies.forEach(moneda=>{
-        moneda.dif=moneda.precioUnitarioVenta-moneda.precioUnitarioCompra
-      })
-      this.$store.state.currencies.forEach(moneda=>{
-        if(moneda.vendido===0){
-          moneda.ganancia=moneda.dif+moneda.precioUnitarioCompra
-        }else{
-          moneda.ganancia= moneda.dif * moneda.cantidadVendida
-        }
-        
+        })       
       })
 
+      this.$store.state.currencies.forEach(moneda=>{
+        if(moneda.vendido===0){
+        moneda.ganancia=moneda.valorCompra-moneda.comprado
+        }
+        else{
+        moneda.precioUnitarioCompra= (moneda.comprado / moneda.cantidadComprada)
+        moneda.precioUnitarioVenta= (moneda.vendido / moneda.cantidadVendida)
+        moneda.dif=moneda.precioUnitarioVenta - moneda.precioUnitarioCompra
+        moneda.ganancia=moneda.dif*moneda.cantidadVendida
+        }
+      })
+      
     }
   },
   mounted(){
     this.$store.dispatch('obtenerTransacciones')
+    this.$store.commit('obtenerPrecioCompra')
     this.calcularGanancias()
   },
   unmounted(){
     this.$store.state.currencies.forEach(moneda=>{
       moneda.dif=0
+      moneda.cantidadVendida=0
+      moneda.ganancia=0
       })
   }
   }

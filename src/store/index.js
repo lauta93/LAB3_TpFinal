@@ -5,11 +5,11 @@ export default createStore({
   state: {
     username: '',
     currencies: [
-      {id: 'btc', nombre: 'Bitcoin', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0, precioUnitarioCompra: 0, precioUnitarioVenta:0, cantidadVendida: 0},
-      {id: 'eth', nombre: 'Ethereum', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0, precioUnitarioCompra: 0, precioUnitarioVenta:0, cantidadVendida: 0},
-      {id: 'dai', nombre: 'DAI', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0, precioUnitarioCompra: 0, precioUnitarioVenta:0, cantidadVendida: 0},
-      {id: 'usdt', nombre: 'USDT', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0, precioUnitarioCompra: 0, precioUnitarioVenta:0, cantidadVendida: 0},        
-      {id: 'doge', nombre: 'DogeCoin', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0, precioUnitarioCompra: 0, precioUnitarioVenta:0, cantidadVendida: 0}        
+      {id: 'btc', nombre: 'Bitcoin', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0, precioUnitarioCompra: 0, precioUnitarioVenta:0, cantidadComprada:0, cantidadVendida: 0},
+      {id: 'eth', nombre: 'Ethereum', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0, precioUnitarioCompra: 0, precioUnitarioVenta:0, cantidadComprada:0, cantidadVendida: 0},
+      {id: 'dai', nombre: 'DAI', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0, precioUnitarioCompra: 0, precioUnitarioVenta:0, cantidadComprada:0, cantidadVendida: 0},
+      {id: 'usdt', nombre: 'USDT', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0, precioUnitarioCompra: 0, precioUnitarioVenta:0, cantidadComprada:0, cantidadVendida: 0},        
+      {id: 'doge', nombre: 'DogeCoin', cantidad: 0, valorCompra: 0, valorVenta: 0, ganancia: 0, vendido: 0, comprado: 0, dif: 0, precioUnitarioCompra: 0, precioUnitarioVenta:0, cantidadComprada:0, cantidadVendida: 0}        
     ],
     mostrarPopUp: false,
     modificar: false,
