@@ -98,7 +98,7 @@ methods:{
         this.selectedPrice=''
     }
     },    
-created(){
+mounted(){
       this.obtenerMonedas()
     }    
 }

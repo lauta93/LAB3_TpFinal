@@ -62,6 +62,8 @@
         serviceDB.registrarCompra(this.ventaConfirmada)
          this.mensaje= 'Venta exitosa'        
         }
+           this.$store.dispatch('obtenerTransacciones')      
+           this.$store.commit('calcularCantidades')
         },
       cancelar(){
            this.$store.state.vender=false

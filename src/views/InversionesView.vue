@@ -41,7 +41,7 @@ export default{
 
       this.$store.state.currencies.forEach(moneda=>{
         if(moneda.vendido===0){
-        moneda.ganancia=moneda.valorCompra-moneda.comprado
+        moneda.ganancia=((moneda.valorVenta*moneda.cantidad)-(moneda.comprado))
         }
         else{
         moneda.precioUnitarioCompra= (moneda.comprado / moneda.cantidadComprada)
@@ -55,7 +55,7 @@ export default{
   },
   mounted(){
     this.$store.dispatch('obtenerTransacciones')
-    this.$store.commit('obtenerPrecioCompra')
+    this.$store.commit('obtenerPrecioVenta')
     this.calcularGanancias()
   },
   unmounted(){
